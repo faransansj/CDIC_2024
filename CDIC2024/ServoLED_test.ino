@@ -1,9 +1,6 @@
 int servo_pins[]  = {12,11,10,9,8};
 int LED_pins[]    = {6,5,3,4,2};
 
-int sensor_val[5];  
-int current_angle[5] = {};
-
 void set_servo_angle(int angle, int servoPin) // 서보모터 각도 제어 함수
 {
   int pulseWidth = map(angle, 0, 180, 1000, 2000);  // 각도에 따라 1000us에서 2000us 사이의 펄스 폭 계산

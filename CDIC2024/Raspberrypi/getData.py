@@ -4,7 +4,7 @@ import serial
 import re
 
 def start_server(host='192.168.0.12', port=65432, serial_port='/dev/ttyUSB0', baudrate=9600):
-    # 아두이노와 시리얼 통신 설정
+    # 아두이노와 시리얼 통신 설정 host ip, Serial port 사용자 환경에 맞게 수정할 것 
     ser = serial.Serial(serial_port, baudrate, timeout=0.4)
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

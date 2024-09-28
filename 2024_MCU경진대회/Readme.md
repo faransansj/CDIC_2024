@@ -1,5 +1,4 @@
 # 2024 MCU 경진대회 예선
-![](https://www.disu.ac.kr/webdata/upimages/e47z805zabcz0c1z9efzed3z0d8zfc5zde0z88fzec.jpeg)
 Goal : 비데를 설계하고 기능을 구현하시오  
 
 ### 주요 기능 

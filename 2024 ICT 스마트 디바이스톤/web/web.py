@@ -22,7 +22,7 @@ def home():
         'frontDown'
     ]
 
-    # HTML content with 2x2 image grid and captions
+    # HTML content with 2x2 image grid, captions, and buttons
     html_content = '''
     <!doctype html>
     <html lang="en">
@@ -32,6 +32,7 @@ def home():
         <title>PARKICK</title>
     </head>
     <body>
+        <div style="max-width: 1200px; margin: auto; padding: 20px;">
         <div style="display: flex; align-items: center;">
             <img src="static/icon.png" alt="Icon" style="width: 50px; height: 50px; margin-right: 10px;">
             <h1>PARKICK</h1>
@@ -54,6 +55,11 @@ def home():
                 <p>{{ captions[3] }}</p>
             </div>
         </div>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <button style="padding: 10px 20px; margin: 10px; font-size: 16px;">킥보드 주차하기</button>
+            <button style="padding: 10px 20px; margin: 10px; font-size: 16px;">킥보드 대여하기</button>
+        </div>
+            </div>
     </body>
     </html>
     '''

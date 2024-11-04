@@ -25,45 +25,45 @@ PARKICK 시스템은 IoT 기반 프로젝트로, 컴퓨터 비전과 GPIO 컴포
 
 ## 파일별 기능 설명
 1. parkick.py
-의존성: OpenCV, Ultralytics YOLO, RPi.GPIO
-GPIO 핀 설정:
-button_pin: 15번 핀 (버튼 입력)
-led_pin: 17번 핀 (LED 출력)
-주요 함수:
-button_callback: 버튼이 눌릴 때마다 LED를 켜거나 끕니다.
-capture_and_save: 지정된 웹캠 인덱스로부터 이미지를 캡처하고 파일로 저장합니다.
-analyze_environment: 이미지의 일부 영역을 분석하여 "인도" 또는 "도로"로 분류합니다.
-draw_boxes: 감지된 객체에 대해 경계 상자를 그려 시각적으로 표시합니다.
-프로세스:
-네 개의 이미지를 순차적으로 캡처하고 킥보드를 감지한 뒤, 주변 환경을 분석하여 주차 가능 여부를 결정합니다.
+의존성: OpenCV, Ultralytics YOLO, RPi.GPIO  
+GPIO 핀 설정:  
+button_pin: 15번 핀 (버튼 입력)  
+led_pin: 17번 핀 (LED 출력)  
+주요 함수:  
+    button_callback: 버튼이 눌릴 때마다 LED를 켜거나 끕니다.
+    capture_and_save: 지정된 웹캠 인덱스로부터 이미지를 캡처하고 파일로 저장합니다.
+    analyze_environment: 이미지의 일부 영역을 분석하여 "인도" 또는 "도로"로 분류합니다.
+    draw_boxes: 감지된 객체에 대해 경계 상자를 그려 시각적으로 표시합니다.
+프로세스:  
+네 개의 이미지를 순차적으로 캡처하고 킥보드를 감지한 뒤, 주변 환경을 분석하여 주차 가능 여부를 결정합니다.  
 
-2. main.py
-의존성: OpenCV, Ultralytics YOLO, RPi.GPIO, alert.py
-GPIO 핀 설정:
-lock_pin, tilt_switch, boozer, led_Rsig, led_Gsig, led_Bsig, led_gnd
-주요 함수:
-capture_and_save: 웹캠에서 이미지를 캡처하여 파일로 저장합니다.
-프로세스:
-tilt_switch 상태를 모니터링하여 기울어짐이 감지되면 경고를 활성화합니다.
-킥보드 감지 및 주차 가능 여부를 확인하고, 경고 모듈을 호출해 LED 및 부저 알림을 제공합니다.
-
-3. alert.py
-목적: LED와 부저를 사용해 경고를 제공하는 라이브러리입니다.
-함수:
-play_buzzer_parkO_pattern, play_buzzer_parkX_pattern: 주차 허용 또는 불가 시 다른 톤을 재생합니다.
-play_buzzer_tilt_pattern: 기울어짐이 감지될 경우 부저 알림을 재생합니다.
-alert_park: 주차 상태에 따라 LED와 부저를 활성화합니다.
-alert_tilt: 기울기 스위치가 활성화되었을 때 경고 LED와 부저를 활성화합니다.
-사용 방법: main.py에서 감지 상태에 따라 호출하여 물리적 알림을 제공합니다.
+2. main.py  
+의존성: OpenCV, Ultralytics YOLO, RPi.GPIO, alert.py  
+GPIO 핀 설정:  
+lock_pin, tilt_switch, boozer, led_Rsig, led_Gsig, led_Bsig, led_gnd  
+주요 함수:  
+capture_and_save: 웹캠에서 이미지를 캡처하여 파일로 저장합니다.  
+프로세스:  
+tilt_switch 상태를 모니터링하여 기울어짐이 감지되면 경고를 활성화합니다.  
+킥보드 감지 및 주차 가능 여부를 확인하고, 경고 모듈을 호출해 LED 및 부저 알림을 제공합니다.  
+  
+3. alert.py  
+목적: LED와 부저를 사용해 경고를 제공하는 라이브러리입니다.  
+함수:  
+    play_buzzer_parkO_pattern, play_buzzer_parkX_pattern: 주차 허용 또는 불가 시 다른 톤을 재생합니다.  
+    play_buzzer_tilt_pattern: 기울어짐이 감지될 경우 부저 알림을 재생합니다.
+    alert_park: 주차 상태에 따라 LED와 부저를 활성화합니다.
+    alert_tilt: 기울기 스위치가 활성화되었을 때 경고 LED와 부저를 활성화합니다.
+사용 방법: main.py에서 감지 상태에 따라 호출하여 물리적 알림을 제공합니다.  
 
 4. web.py
-목적: 감지 결과를 웹 대시보드로 시각화하고, 주차 및 대여를 제어할 수 있는 Flask 기반 웹 서버입니다.
-라우트:
-/: HTML 페이지를 통해 2x2 이미지 그리드와 각 이미지에 대한 캡션을 표시합니다.
-기능:
+목적: 감지 결과를 웹 대시보드로 시각화하고, 주차 및 대여를 제어할 수 있는 Flask 기반 웹 서버입니다.  
+라우트:  
+/: HTML 페이지를 통해 2x2 이미지 그리드와 각 이미지에 대한 캡션을 표시합니다.  
+기능:  
 감지된 이미지와 함께 "킥보드 주차하기" 및 "킥보드 대여하기" 버튼을 제공합니다.
-간단하고 반응형 레이아웃으로 이미지 위치에 따른 설명 (right, left, frontUp, frontDown)을 제공하여 감지 결과를 직관적으로 전달합니다.
-사용 방법: 서버를 실행하여 PARKICK 상태를 원격으로 접근하고 제어할 수 있습니다.
+간단하고 반응형 레이아웃으로 이미지 위치에 따른 설명 (right, left, frontUp, frontDown)을 제공하여 감지 결과를 직관적으로 전달합니다.  
+사용 방법: 서버를 실행하여 PARKICK 상태를 원격으로 접근하고 제어할 수 있습니다.  
 ---
 ## 설치 및 설정
 
